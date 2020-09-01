@@ -4,7 +4,7 @@ import {
 
 export default {
   name: 'recentPodcast',
-  title: 'Podcast',
+  title: 'Most Recent Podcast',
   type: 'document',
   fields: [{
       name: 'title',
@@ -23,7 +23,7 @@ export default {
     },
     {
       name: 'podcast',
-      title: 'Most Recent Podcasts',
+      title: 'Most Recent Podcast',
       type: 'array',
       of: [{
         type: 'reference',
@@ -42,11 +42,11 @@ export default {
       title = 'No title',
       slug = {},
     }) {
-      const dateSegment = format(publishedAt, 'YYYY/MM')
+      const dateSegment = format(podcast.publishedDate, 'YYYY/MM')
       const path = `/${dateSegment}/${slug.current}/`
       return {
         title,
-        subtitle: publishedAt ? path : 'Missing publishing date'
+        subtitle: podcast.publishedDate ? path : 'Missing publishing date'
       }
     }
   }

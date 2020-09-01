@@ -146,7 +146,7 @@ export default {
     {
       name: 'publishedDate',
       title: 'Published Date',
-      description: 'When the podcast created',
+      description: 'When the podcast released',
       type: 'datetime'
     }
   ],
@@ -162,7 +162,6 @@ export default {
   preview: {
     select: {
       title: 'title',
-      publishedAt: 'publishedAt',
       slug: 'slug'
     },
     prepare({
@@ -170,11 +169,11 @@ export default {
       publishedAt,
       slug = {},
     }) {
-      const dateSegment = format(publishedAt, 'YYYY/MM')
+      const dateSegment = format(publishedDate, 'YYYY/MM')
       const path = `/${dateSegment}/${slug.current}/`
       return {
         title,
-        subtitle: publishedAt ? path : 'Missing publishing date'
+        subtitle: publishedDate ? path : 'Missing publishing date'
       }
     }
   }
