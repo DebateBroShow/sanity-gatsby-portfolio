@@ -22,22 +22,80 @@ export default {
       }
     },
     {
-      name: 'publishedDate',
-      title: 'Published Date',
-      description: 'When the podcast created',
-      type: 'datetime'
+      title: 'SoundCloud Link',
+      name: 'href',
+      type: 'url',
+      validation: Rule => Rule.uri({
+        scheme: ['https']
+      })
     },
     {
-      name: 'shortDescription',
-      title: 'Short Description',
-      type: 'simplePortableText'
+      title: 'SoundCloud Embed Width',
+      name: 'width',
+      description: 'Please select only one!',
+      type: 'array',
+      of: [{
+        type: 'number'
+      }],
+      options: {
+        layout: 'radio',
+        list: [{
+            title: '300',
+            value: 300
+          },
+          {
+            title: '500',
+            value: 500
+          },
+          {
+            title: '650',
+            value: 650
+          },
+        ]
+      }
+    },
+    {
+      title: 'SoundCloud Options',
+      name: 'parameters',
+      type: 'array',
+      of: [{
+        type: 'string'
+      }],
+      options: {
+        layout: 'radio',
+        list: [{
+            title: 'Autoplay',
+            value: 'autoplay'
+          },
+          {
+            title: 'Buying',
+            value: 'buying'
+          },
+          {
+            title: 'Sharing',
+            value: 'sharing'
+          },
+          {
+            title: 'Download',
+            value: 'download'
+          },
+          {
+            title: 'Show Playcount',
+            value: 'show_playcount'
+          },
+          {
+            title: 'Show User',
+            value: 'show_user'
+          }
+        ]
+      }
     },
     {
       name: 'hosts',
       title: 'Hosts',
       type: 'array',
       of: [{
-        type: 'person'
+        type: 'host'
       }]
     },
     {
@@ -52,13 +110,31 @@ export default {
       }]
     },
     {
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'simplePortableText'
+    },
+    {
       name: 'description',
       title: 'Long Description',
       type: 'projectPortableText'
     },
     {
-      name: 'relatedProjects',
-      title: 'Related projects',
+      name: 'thumbnail',
+      title: 'Thumbnail',
+      type: 'image',
+      fields: [{
+        name: 'caption',
+        type: 'string',
+        title: 'Caption',
+        options: {
+          isHighlighted: true // <-- make this field easily accessible
+        }
+      }]
+    },
+    {
+      name: 'relatedPodcast',
+      title: 'Related Podcasts',
       type: 'array',
       of: [{
         type: 'reference',
@@ -66,25 +142,38 @@ export default {
           type: 'podcast'
         }
       }]
+    },
+    {
+      name: 'publishedDate',
+      title: 'Published Date',
+      description: 'When the podcast released',
+      type: 'datetime'
     }
   ],
+  initialValue: {
+    parameters: [false,
+      0,
+      1,
+      1,
+      true,
+      1
+    ]
+  },
   preview: {
     select: {
       title: 'title',
-      publishedAt: 'publishedAt',
       slug: 'slug'
     },
     prepare({
       title = 'No title',
       publishedAt,
       slug = {},
-      media
     }) {
-      const dateSegment = format(publishedAt, 'YYYY/MM')
+      const dateSegment = format(publishedDate, 'YYYY/MM')
       const path = `/${dateSegment}/${slug.current}/`
       return {
         title,
-        subtitle: publishedAt ? path : 'Missing publishing date'
+        subtitle: publishedDate ? path : 'Missing publishing date'
       }
     }
   }
