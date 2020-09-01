@@ -1,11 +1,12 @@
-import {format} from 'date-fns'
+import {
+  format
+} from 'date-fns'
 
 export default {
-  name: 'Podcast Card',
-  title: 'Podcast Card',
+  name: 'podcast',
+  title: 'Podcast',
   type: 'document',
-  fields: [
-    {
+  fields: [{
       name: 'title',
       title: 'Title',
       type: 'string'
@@ -27,62 +28,62 @@ export default {
       type: 'datetime'
     },
     {
-      name: 'description',
-      title: 'Description',
+      name: 'shortDescription',
+      title: 'Short Description',
       type: 'simplePortableText'
     },
     {
       name: 'hosts',
       title: 'Hosts',
       type: 'array',
-      of: [{type: 'projectMember'}]
-    },
-    {
-      name: 'startedAt',
-      title: 'Started at',
-      type: 'datetime'
-    },
-    {
-      name: 'endedAt',
-      title: 'Ended at',
-      type: 'datetime'
-    },
-    {
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'figure'
+      of: [{
+        type: 'projectMember'
+      }]
     },
     {
       name: 'categories',
       title: 'Categories',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}]
+      of: [{
+        type: 'reference',
+        to: {
+          type: 'category'
+        }
+      }]
     },
     {
-      name: 'body',
-      title: 'Body',
+      name: 'description',
+      title: 'Long Description',
       type: 'projectPortableText'
     },
     {
       name: 'relatedProjects',
       title: 'Related projects',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'sampleProject'}}]
+      of: [{
+        type: 'reference',
+        to: {
+          type: 'podcast'
+        }
+      }]
     }
   ],
   preview: {
     select: {
       title: 'title',
       publishedAt: 'publishedAt',
-      slug: 'slug',
-      media: 'mainImage'
+      slug: 'slug'
     },
-    prepare({title = 'No title', publishedAt, slug = {}, media}) {
+    prepare({
+      title = 'No title',
+      publishedAt,
+      slug = {},
+      media
+    }) {
       const dateSegment = format(publishedAt, 'YYYY/MM')
       const path = `/${dateSegment}/${slug.current}/`
       return {
         title,
-        media,
         subtitle: publishedAt ? path : 'Missing publishing date'
       }
     }
