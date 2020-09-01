@@ -12,6 +12,16 @@ export default {
       type: 'string'
     },
     {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      description: 'Some frontend will require a slug to be set to be able to show the project',
+      options: {
+        source: 'title',
+        maxLength: 96
+      }
+    },
+    {
       title: 'SoundCloud Link',
       name: 'href',
       type: 'url',
@@ -22,6 +32,7 @@ export default {
     {
       title: 'SoundCloud Embed Width',
       name: 'width',
+      description: 'Please select only one!',
       type: 'array',
       of: [{
         type: 'number'
@@ -80,27 +91,6 @@ export default {
       }
     },
     {
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      description: 'Some frontend will require a slug to be set to be able to show the project',
-      options: {
-        source: 'title',
-        maxLength: 96
-      }
-    },
-    {
-      name: 'publishedDate',
-      title: 'Published Date',
-      description: 'When the podcast created',
-      type: 'datetime'
-    },
-    {
-      name: 'shortDescription',
-      title: 'Short Description',
-      type: 'simplePortableText'
-    },
-    {
       name: 'hosts',
       title: 'Hosts',
       type: 'array',
@@ -120,13 +110,31 @@ export default {
       }]
     },
     {
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'simplePortableText'
+    },
+    {
       name: 'description',
       title: 'Long Description',
       type: 'projectPortableText'
     },
     {
-      name: 'relatedProjects',
-      title: 'Related projects',
+      name: 'thumbnail',
+      title: 'Thumbnail',
+      type: 'image',
+      fields: [{
+        name: 'caption',
+        type: 'string',
+        title: 'Caption',
+        options: {
+          isHighlighted: true // <-- make this field easily accessible
+        }
+      }]
+    },
+    {
+      name: 'relatedPodcast',
+      title: 'Related Podcasts',
       type: 'array',
       of: [{
         type: 'reference',
@@ -134,34 +142,40 @@ export default {
           type: 'podcast'
         }
       }]
+    },
+    {
+      name: 'publishedDate',
+      title: 'Published Date',
+      description: 'When the podcast created',
+      type: 'datetime'
     }
   ],
   initialValue: {
-    parameters: ['False',
-      'False',
-      'True',
-      'True',
-      'True',
-      'True']
+    parameters: [false,
+      0,
+      1,
+      1,
+      true,
+      1
+    ]
+  },
+  preview: {
+    select: {
+      title: 'title',
+      publishedAt: 'publishedAt',
+      slug: 'slug'
     },
-    preview: {
-      select: {
-        title: 'title',
-        publishedAt: 'publishedAt',
-        slug: 'slug'
-      },
-      prepare({
-        title = 'No title',
-        publishedAt,
-        slug = {},
-        media
-      }) {
-        const dateSegment = format(publishedAt, 'YYYY/MM')
-        const path = `/${dateSegment}/${slug.current}/`
-        return {
-          title,
-          subtitle: publishedAt ? path : 'Missing publishing date'
-        }
+    prepare({
+      title = 'No title',
+      publishedAt,
+      slug = {},
+    }) {
+      const dateSegment = format(publishedAt, 'YYYY/MM')
+      const path = `/${dateSegment}/${slug.current}/`
+      return {
+        title,
+        subtitle: publishedAt ? path : 'Missing publishing date'
       }
     }
   }
+}

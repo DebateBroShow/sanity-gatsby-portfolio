@@ -9,6 +9,7 @@ import category from './documents/category'
 import person from './documents/person'
 import sampleProject from './documents/sampleProject'
 import podcast from './documents/podcast'
+import podcast from './documents/recentPodcast'
 import siteSettings from './documents/siteSettings'
 
 // Object types
@@ -40,6 +41,7 @@ export default createSchema({
     person,
     sampleProject,
     siteSettings,
-    podcast
+    podcast,
+    recentPodcast
   ])
 })
