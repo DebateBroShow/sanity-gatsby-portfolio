@@ -38,7 +38,7 @@ export default createSchema({
     person,
     sampleProject,
     siteSettings,
-    podcastProject,
+    podcast,
     host
   ])
 })
