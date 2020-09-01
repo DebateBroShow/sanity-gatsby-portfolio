@@ -3,7 +3,7 @@ import {
 } from 'date-fns'
 
 export default {
-  name: 'podcast',
+  name: 'recentPodcast',
   title: 'Podcast',
   type: 'document',
   fields: [{
@@ -22,7 +22,7 @@ export default {
       }
     },
     {
-      name: 'recentPodcast',
+      name: 'podcast',
       title: 'Most Recent Podcasts',
       type: 'array',
       of: [{
