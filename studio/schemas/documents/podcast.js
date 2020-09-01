@@ -21,7 +21,7 @@ export default {
     },
     {
       title: 'SoundCloud Embed Width',
-      name: 'parameters',
+      name: 'width',
       type: 'array',
       of: [{
         type: 'integer'
