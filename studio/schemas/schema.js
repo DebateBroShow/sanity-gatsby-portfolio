@@ -8,6 +8,7 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import category from './documents/category'
 import person from './documents/person'
 import sampleProject from './documents/sampleProject'
+import podcast from './documents/podcast'
 import siteSettings from './documents/siteSettings'
 
 // Object types
