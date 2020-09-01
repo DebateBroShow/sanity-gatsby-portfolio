@@ -31,6 +31,7 @@ export default createSchema({
     projectMember,
     projectPortableText,
     simplePortableText,
+    host,
     // The following are document types which will appear
     // in the studio.
     category,

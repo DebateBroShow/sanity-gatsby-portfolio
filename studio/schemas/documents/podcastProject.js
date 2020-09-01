@@ -37,7 +37,7 @@ export default {
       title: 'Hosts',
       type: 'array',
       of: [{
-        type: 'projectMember'
+        type: 'host'
       }]
     },
     {
