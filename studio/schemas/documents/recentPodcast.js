@@ -22,7 +22,7 @@ export default {
       }
     },
     {
-      name: 'podcast',
+      name: 'recentPodcast',
       title: 'Most Recent Podcasts',
       type: 'array',
       of: [{
