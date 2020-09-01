@@ -24,7 +24,7 @@ export default {
       name: 'width',
       type: 'array',
       of: [{
-        type: 'integer'
+        type: 'number'
       }],
       options: {
         layout: 'radio',
