@@ -1,0 +1,13 @@
+Podcast Card:
+- Image
+- Short Description
+- Button Text
+- Button Colour
+
+Podcast Project
+- Title
+- Date
+- Long Description
+- Soundcloud URL
+- Episode Number
+- Soundcloud Parameters (width, autoplay, buying, sharing, download, download, show_playcount, show_user)
