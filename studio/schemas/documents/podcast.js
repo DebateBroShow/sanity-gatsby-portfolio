@@ -37,7 +37,7 @@ export default {
       title: 'Hosts',
       type: 'array',
       of: [{
-        type: 'host'
+        type: 'person'
       }]
     },
     {
